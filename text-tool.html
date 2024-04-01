@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字統計工具</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      margin-bottom: 10px;
+    }
+    #result {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>文章統計工具</h1>
+  <label for="article">請輸入文章內容：</label><br>
+  <textarea id="article" placeholder="在這裡輸入文章內容..."></textarea>
+  <button onclick="countWords()">統計字數</button>
+  <div id="result"></div>
+
+  <script>
+    function countWords() {
+      var article = document.getElementById('article').value;
+      var chineseCount = (article.match(/[\u4E00-\u9FFF]/g) || []).length;
+      var englishCount = (article.match(/[a-zA-Z]/g) || []).length;
+      var spaceCount = (article.match(/\s/g) || []).length;
+      var totalCount = article.length;
+
+      var result = document.getElementById('result');
+      result.innerHTML = "<p>中文字數：" + chineseCount + "</p>" +
+                         "<p>英文字數：" + englishCount + "</p>" +
+                         "<p>空白字數：" + spaceCount + "</p>" +
+                         "<p>總字數：" + totalCount + "</p>";
+    }
+  </script>
+</body>
+</html>
